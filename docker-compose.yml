@@ -1,0 +1,44 @@
+---
+########################################################################
+# pypiserver docker-compose example
+########################################################################
+
+version: "3.3"
+
+services:
+  pypiserver:
+    image: pypiserver/pypiserver:latest
+    volumes:
+      - type: bind
+        source: ./data
+        target: /data
+    # Use an .htpasswd file to control access, serve packages from
+    # ./data (which will be /data in the container)
+    command: -P /data/.htpasswd -a update,download,list /data/packages
+    networks:
+      - pypiserver_network
+#    ports:
+#      - "8080:8080"
+
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - type: bind
+        source: ./config/nginx/conf.d
+        target: /etc/nginx/conf.d
+      - type: bind
+        source: ./data/.htpasswd
+        target: /etc/nginx/.htpasswd
+    depends_on:
+      - pypiserver
+    networks:
+      - pypiserver_network
+
+networks:
+  pypiserver_network:
+    driver: bridge
+
+volumes:
+  data:
