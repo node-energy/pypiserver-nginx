@@ -12,13 +12,9 @@ services:
       - type: bind
         source: ./data
         target: /data
-    # Use an .htpasswd file to control access, serve packages from
-    # ./data (which will be /data in the container)
-    command: -P /data/.htpasswd -a update,download,list /data/packages
+    command: -a update,download,list /data/packages
     networks:
       - pypiserver_network
-#    ports:
-#      - "8080:8080"
 
   nginx:
     image: nginx:stable-alpine
@@ -29,8 +25,8 @@ services:
         source: ./config/nginx/conf.d
         target: /etc/nginx/conf.d
       - type: bind
-        source: ./data/.htpasswd
-        target: /etc/nginx/.htpasswd
+        source: ./config/nginx/auth
+        target: /etc/nginx/auth
     depends_on:
       - pypiserver
     networks:
