@@ -1,6 +1,9 @@
 ## Setup
 
 * Deploy a droplet on Digital Ocean having Docker preinstalled (one click apps). The cheapest one will do the job.
+* ssh into it
+* Clone this repository and cd into it
+* `docker-compose up` and it's running
 
 ### Create `.htpasswd` file
 
@@ -20,6 +23,8 @@ If you want to add more users, call
 ## Usage
 
 ### Build
+
+`python setup.py sdist bdist_wheel`
 
 ### Upload
 Somehow reading from environment variables didn't work for me, at least not locally.
