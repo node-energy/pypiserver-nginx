@@ -1,4 +1,4 @@
-## Deployment
+## Get the server to run
 
 ### Initial setup
 
@@ -17,6 +17,15 @@ Next, you need to create an `.htpasswd` file:
 If you want to add more users, call
 
 `htpasswd onfig/nginx/auth/.htpasswd second_username`
+
+### Obtain SSL certificate
+Now it's time to get a SSL certificate. There is a chicken and egg problem involved here.
+You need to have a certificate for nginx to start but you need nginx to be running to serve the challenge required by [Let's Encrypt](https://letsencrypt.org/).
+Luckily [wmnnd](https://github.com/wmnnd/nginx-certbot) wrote a script that solves this issue.
+It's part of this repository, so you can simply run `./init-letsencrypt.sh`.
+
+### Start
+Finally you can start the server. It's as simple as `docker-compose up`.
 
 ### Setup environment variables
 * TWINE_REPOSITORY_URL
