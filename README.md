@@ -1,7 +1,7 @@
 ## Todo
-* Auto start server on droplet start
 * less duplication of url in configuration
-
+* Configure django-timeseries' CircleCI to automatically build and upload.
+* Resolve why packages are not stored in packages folder
 
 ## Get the server to run
 
@@ -39,6 +39,17 @@ It's part of this repository, so you can simply run `./init-letsencrypt.sh`.
 ### Start
 Finally you can start the server. It's as simple as `docker-compose up`.
 
+
+### Auto start on system start
+You don't want to ssh into the server every time the server did a reboot. 
+The easiest way to ensure it auto starts on system boot is setting up a systemd service.
+This repository contains a configuration for that service.
+You can enable it by: 
+
+```
+cp docker-compose-privatepypi.service /etc/systemd/system/
+systemctl enable docker-compose-privatepypi
+```
 
 ## Usage
 
