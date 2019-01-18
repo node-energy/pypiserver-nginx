@@ -53,11 +53,6 @@ systemctl enable docker-compose-privatepypi
 
 ## Usage
 
-### Setup environment variables
-* TWINE_REPOSITORY_URL
-* TWINE_USERNAME
-* TWINE_PASSWORD
-
 ### Build
 
 `python setup.py sdist bdist_wheel`
@@ -66,6 +61,11 @@ systemctl enable docker-compose-privatepypi
 Somehow reading from environment variables didn't work for me, at least not locally.
 
 `twine upload dist/* --repository-url $TWINE_REPOSITORY_URL -u $TWINE_USERNAME -p $TWINE_PASSWORD`
+
+### Naming
+By default the private PyPI server will fallback to the https//pypi.org/ if the desired package is not found.
+Therefore you'll want to name your packages in a way they don't clash with existing packages on PyPI.
+Otherwise this can become a source of hard to track bugs because a possibly failing install won't fail loudly.
 
 
 ## Install packages from this repository
