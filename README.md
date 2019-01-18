@@ -74,20 +74,14 @@ Configure Pipfile similar to this:
 [[source]]
 name = "node-energy"
 verify_ssl = true
-url = "https://user:pass@pypi.node.energy"
+url = "https://${USERNAME}:${PASSWORD}@pypi.node.energy"
 ```
 
-`pipenv install package-name --index node-energy`
+`USERNAME=user PASSWORD=pass pipenv install package-name --index node-energy`
 
 Alternatively, you can install it without configuring the index in `Pipfile`: 
 
 `pipenv install package-name --index https://user:pass@pypi.node.energy/`
-
-Unfortunately there does not seem to be a way to configure the access via environment variables using pipenv at the moment.
-This is the reason why you should set up separate users with upload permissions. 
-For these, you can safely store the credentials in your CI environment variables.
-So you only have to check in the reading credentials into your codebase.
-Let's hope `pipenv` will support a better way to pass in credentials in the future.
 
 ## Credits:
 Thanks for inspiration:
