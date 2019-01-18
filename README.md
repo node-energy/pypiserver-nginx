@@ -1,3 +1,8 @@
+## Todo
+* Auto start server on droplet start
+* less duplication of url in configuration
+
+
 ## Get the server to run
 
 ### Initial setup
@@ -27,12 +32,13 @@ It's part of this repository, so you can simply run `./init-letsencrypt.sh`.
 ### Start
 Finally you can start the server. It's as simple as `docker-compose up`.
 
+
+## Usage
+
 ### Setup environment variables
 * TWINE_REPOSITORY_URL
 * TWINE_USERNAME
 * TWINE_PASSWORD
-
-## Usage
 
 ### Build
 
