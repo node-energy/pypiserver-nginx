@@ -84,9 +84,13 @@ Alternatively, you can install it without configuring the index in `Pipfile`:
 `pipenv install package-name --index https://user:pass@pypi.node.energy/`
 
 Unfortunately there does not seem to be a way to configure the access via environment variables using pipenv at the moment.
-
+This is the reason why you should set up separate users with upload permissions. 
+For these, you can safely store the credentials in your CI environment variables.
+So you only have to check in the reading credentials into your codebase.
+Let's hope `pipenv` will support a better way to pass in credentials in the future.
 
 ## Credits:
 Thanks for inspiration:
 * https://pawamoy.github.io/2018/02/01/docker-compose-django-postgres-nginx.html
 * https://medium.com/@pentacent/nginx-and-lets-encrypt-with-docker-in-less-than-5-minutes-b4b8a60d3a71
+* https://stackoverflow.com/questions/43671482/how-to-run-docker-compose-up-d-at-system-start-up
