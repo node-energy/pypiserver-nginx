@@ -7,7 +7,7 @@
 
 ### Initial setup
 
-* Deploy a droplet on Digital Ocean having Docker preinstalled (one click apps). The cheapest one will do the job.
+* Deploy a droplet on Digital Ocean having Docker preinstalled (one click apps). The cheapest one will do the job for us.
 * Set your DNS records up, so you have a URL for that IP (required for Let's encrypt)
 * ssh into it
 * Clone this repository and cd into it
@@ -15,20 +15,13 @@
 
 ### Create `.htpasswd` files
 
-Next, you need to create a `.htpasswd` file for downloading permissions:
+Next, you need to create a `.htpasswd` file to restrict access to the server:
 
 `htpasswd -c config/nginx/auth/.htpasswd username`
 
 If you want to add more users, call
 
 `htpasswd config/nginx/auth/.htpasswd second_username`
-
-Create another `.htpasswd` file for uploading permissions:
-`htpasswd -c data/.htpasswd upload_username`
-
-Users allowed to upload packages must also be listed in the nginx .htpasswd
-
-`htpasswd config/nginx/auth/.htpasswd upload_username` # enter same password as before
 
 ### Obtain SSL certificate
 Now it's time to get a SSL certificate. There is a chicken and egg problem involved here.
@@ -74,8 +67,11 @@ Configure Pipfile similar to this:
 [[source]]
 name = "node-energy"
 verify_ssl = true
-url = "https://user:pass@pypi.node.energy"
+url = "https://${PRIVATE_PYPI_USERNAME}:${PRIVATE_PYPI_PASSWORD}@pypi.node.energy"
 ```
+
+and set the user and password environment variables on your system.
+Now you can install packages from the private PyPI via:
 
 `pipenv install package-name --index node-energy`
 
@@ -83,13 +79,10 @@ Alternatively, you can install it without configuring the index in `Pipfile`:
 
 `pipenv install package-name --index https://user:pass@pypi.node.energy/`
 
-Unfortunately there does not seem to be a way to configure the access via environment variables using pipenv at the moment.
-This is the reason why you should set up separate users with upload permissions. 
-For these, you can safely store the credentials in your CI environment variables.
-So you only have to check in the reading credentials into your codebase.
-Let's hope `pipenv` will support a better way to pass in credentials in the future.
+This will store your credentials in clear text in your `Pipfile` and `Pipfile.lock`, so you should rather not do this.
 
 ## Credits:
+
 Thanks for inspiration:
 * https://pawamoy.github.io/2018/02/01/docker-compose-django-postgres-nginx.html
 * https://medium.com/@pentacent/nginx-and-lets-encrypt-with-docker-in-less-than-5-minutes-b4b8a60d3a71

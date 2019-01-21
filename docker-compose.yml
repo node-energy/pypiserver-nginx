@@ -12,7 +12,7 @@ services:
       - type: bind
         source: ./data
         target: /data
-    command: -P /data/.htpasswd /data/packages
+    command: -a . -P . /data/packages
     networks:
       - pypiserver_network
 
