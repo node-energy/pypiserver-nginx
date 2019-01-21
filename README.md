@@ -30,7 +30,7 @@ Luckily [wmnnd](https://github.com/wmnnd/nginx-certbot) wrote a script that solv
 It's part of this repository, so you can simply run `./init-letsencrypt.sh`.
 
 ### Start
-Finally you can start the server. It's as simple as `docker-compose up`.
+Finally you can start the server. It's as simple as `docker-compose up -d`.
 
 
 ### Auto start on system start
