@@ -1,8 +1,3 @@
-## Todo
-* less duplication of url in configuration
-* Configure django-timeseries' CircleCI to automatically build and upload.
-* Resolve why packages are not stored in packages folder
-
 ## Get the server to run
 
 ### Initial setup

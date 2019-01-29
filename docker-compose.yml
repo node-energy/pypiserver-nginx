@@ -51,6 +51,3 @@ services:
 networks:
   pypiserver_network:
     driver: bridge
-
-#volumes:
-#  data:
