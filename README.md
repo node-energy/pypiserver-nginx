@@ -41,11 +41,33 @@ systemctl enable docker-compose-privatepypi
 
 ## Usage
 
-### Build
+### With poetry
+
+#### Build
+
+Update version number in `pyproject.toml`, then
+
+`poetry build`
+
+
+#### Upload
+
+Make sure poetry is configured to have access to that PyPI. 
+
+```
+poetry config repositories.nodeenergy https://pypi.node.energy/  # no simple!
+poetry config http-basic.nodeenergy username password
+```
+
+[See here for more information](https://poetry.eustace.io/docs/repositories/#adding-a-repository)
+
+### Other
+
+#### Build
 
 `python setup.py sdist bdist_wheel`
 
-### Upload
+#### Upload
 Somehow reading from environment variables didn't work for me, at least not locally.
 
 `twine upload dist/* --repository-url $TWINE_REPOSITORY_URL -u $TWINE_USERNAME -p $TWINE_PASSWORD`
@@ -57,6 +79,20 @@ Otherwise this can become a source of hard to track bugs because a possibly fail
 
 
 ## Install packages from this repository
+
+### Via poetry
+
+Add this to the `pyproject.toml`
+
+```
+[[tool.poetry.source]]
+name = "nodeenergy"
+url = "https://pypi.node.energy/simple/"
+```
+
+and make sure you configured poetry to have access to the credentials (see section for uploading above).
+
+### Via pipenv
 Configure Pipfile similar to this:
 ```
 [[source]]
@@ -75,6 +111,12 @@ Alternatively, you can install it without configuring the index in `Pipfile`:
 `pipenv install package-name --index https://user:pass@pypi.node.energy/`
 
 This will store your credentials in clear text in your `Pipfile` and `Pipfile.lock`, so you should rather not do this.
+
+### Via pip
+
+`pip install -f https://pypi.node.energy/packages package-name`
+
+This will ask you for your username and password.
 
 ## Credits:
 
