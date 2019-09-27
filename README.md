@@ -59,6 +59,12 @@ poetry config repositories.nodeenergy https://pypi.node.energy/  # no simple!
 poetry config http-basic.nodeenergy username password
 ```
 
+Now you can publish the package
+
+```
+poetry publish -r nodeenergy
+```
+
 [See here for more information](https://poetry.eustace.io/docs/repositories/#adding-a-repository)
 
 ### Other
