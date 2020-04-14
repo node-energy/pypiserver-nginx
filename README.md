@@ -45,6 +45,9 @@ cp docker-compose-privatepypi.service /etc/systemd/system/
 systemctl enable docker-compose-privatepypi
 ```
 
+### Upgrade
+To upgrade the dependencies, run `docker-compose pull && docker-compose down && docker-compose up -d`
+
 ## Usage
 
 ### With poetry
