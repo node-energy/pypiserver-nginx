@@ -7,6 +7,12 @@
 * ssh into it
 * Clone this repository and cd into it
 * Install `htpasswd` to setup http authentication: `apt install apache2-utils`
+* Create folder to store packages, create `pypiserver` user and group and give them access
+  * addgroup --gid 9898 —system pypiserver
+  * adduser --uid 9898 --ingroup pypiserver --system —no-create-home pypiserver
+  * mkdir data/packages
+  * chown -R pypiserver:pypiserver data/packages
+  * chmod g+s data/packages
 
 ### Create `.htpasswd` files
 
