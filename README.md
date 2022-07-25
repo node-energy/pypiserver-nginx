@@ -10,8 +10,8 @@
 * Create folder to store packages, create `pypiserver` user and group and give them access
 
 ```
-sudo addgroup --gid 9898 —-system pypiserver
-sudo adduser --uid 9898 --ingroup pypiserver --system —-no-create-home pypiserver
+sudo addgroup --system --gid 9898  pypiserver
+sudo adduser --uid 9898 --ingroup pypiserver --system --no-create-home pypiserver
 sudo mkdir data/packages
 sudo chown -R pypiserver:pypiserver data/packages
 sudo chmod g+s data/packages
