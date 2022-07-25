@@ -79,4 +79,4 @@ docker compose run --rm --entrypoint "\
 echo
 
 echo "### Starting ..."
-#docker compose up
+docker compose up
