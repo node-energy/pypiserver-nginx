@@ -7,7 +7,7 @@ if ! [ -x "$(command -v docker)" ]; then
   exit 1
 fi
 
-domains=(pypi.node.energy lt.node.energy)
+domains=(pypi.node.energy)
 rsa_key_size=4096
 data_path="./data/certbot"
 read -p "Please enter your e-mail-address " email
