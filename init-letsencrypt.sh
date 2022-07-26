@@ -8,6 +8,7 @@ if ! [ -x "$(command -v docker)" ]; then
 fi
 
 domains=(pypi.node.energy lt.node.energy)
+name=(pypi.node.energy)
 rsa_key_size=4096
 data_path="./data/certbot"
 read -p "Please enter your e-mail-address " email
@@ -30,8 +31,8 @@ if [ ! -e "$data_path/conf/options-ssl-nginx.conf" ] || [ ! -e "$data_path/conf/
 fi
 
 echo "### Creating dummy certificate for $domains ..."
-path="/etc/letsencrypt/live/$domains"
-mkdir -p "$data_path/conf/live/$domains"
+path="/etc/letsencrypt/live/$name"
+mkdir -p "$data_path/conf/live/$name"
 docker compose run --rm --entrypoint "\
   openssl req -x509 -nodes -newkey rsa:$rsa_key_size -days 1\
     -keyout '$path/privkey.pem' \
@@ -46,9 +47,9 @@ echo
 
 echo "### Deleting dummy certificate for $domains ..."
 docker compose run --rm --entrypoint "\
-  rm -Rf /etc/letsencrypt/live/$domains && \
-  rm -Rf /etc/letsencrypt/archive/$domains && \
-  rm -Rf /etc/letsencrypt/renewal/$domains.conf" certbot
+  rm -Rf /etc/letsencrypt/live/$name && \
+  rm -Rf /etc/letsencrypt/archive/$name && \
+  rm -Rf /etc/letsencrypt/renewal/$name.conf" certbot
 echo
 
 
@@ -58,6 +59,7 @@ domain_args=""
 for domain in "${domains[@]}"; do
   domain_args="$domain_args -d $domain"
 done
+echo $domain_args
 
 # Select appropriate email arg
 case "$email" in
