@@ -12,7 +12,7 @@ services:
       - type: bind
         source: ./data/packages
         target: /packages
-    command: -a . -P . /packages
+    command: --hash-algo=sha256 -a . -P . /packages
     networks:
       - pypiserver_network
 
