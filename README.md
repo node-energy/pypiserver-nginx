@@ -67,14 +67,14 @@ Update version number in `pyproject.toml`, then
 Make sure poetry is configured to have access to that PyPI. 
 
 ```
-poetry config repositories.nodeenergy https://pypi.node.energy/  # no simple!
-poetry config http-basic.nodeenergy username password
+poetry config repositories.node-energy https://pypi.node.energy/  # no simple!
+poetry config http-basic.node-energy <username>  # this will then ask for the password
 ```
 
 Now you can publish the package
 
 ```
-poetry publish -r nodeenergy
+poetry publish -r node-energy
 ```
 
 [See here for more information](https://poetry.eustace.io/docs/repositories/#adding-a-repository)
@@ -104,8 +104,9 @@ Add this to the `pyproject.toml`
 
 ```
 [[tool.poetry.source]]
-name = "nodeenergy"
-url = "https://pypi.node.energy/simple/"
+name = "node-energy"
+url = "https://pypi.node.energy/simple"
+priority = "explicit"
 ```
 
 and make sure you configured poetry to have access to the credentials (see section for uploading above).
