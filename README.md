@@ -27,6 +27,10 @@ If you want to add more users, call
 
 `htpasswd config/nginx/auth/.htpasswd second_username`
 
+> [!IMPORTANT]
+> The selected password should be unique per user, of sufficient length and include only letters and numbers! Please restrain
+> from using symbols as they may break authorization.
+
 ### Obtain SSL certificate
 Now it's time to get a SSL certificate. There is a chicken and egg problem involved here.
 You need to have a certificate for nginx to start but you need nginx to be running to serve the challenge required by [Let's Encrypt](https://letsencrypt.org/).
